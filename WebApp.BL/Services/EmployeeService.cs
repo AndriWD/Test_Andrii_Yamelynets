@@ -27,7 +27,7 @@ namespace WebApp.BL.Services
         {
             var employees = await this.unitOfWork.EmployeeRepository.GetEmployeesById(employeeId);
 
-            var employeeLookup = employees.ToDictionary(e => e.ID, e => new EmployeeTreeDto
+            var employeeDict = employees.ToDictionary(e => e.ID, e => new EmployeeTreeDto
             {
                 ID = e.ID,
                 Name = e.Name,
@@ -38,7 +38,7 @@ namespace WebApp.BL.Services
 
             foreach (var employee in employees)
             {
-                var employeeTreeItemDto = employeeLookup[employee.ID];
+                var employeeTreeItemDto = employeeDict[employee.ID];
 
                 if (employee.Level == 0)
                 {
@@ -46,7 +46,7 @@ namespace WebApp.BL.Services
                 }
                 else
                 {
-                    var manager = employeeLookup[employee.ManagerID.Value];
+                    var manager = employeeDict[employee.ManagerID.Value];
                     manager.Employees.Add(employeeTreeItemDto);
                 }
             }
