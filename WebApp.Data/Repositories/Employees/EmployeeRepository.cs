@@ -60,7 +60,7 @@ public class EmployeeRepository : IEmployeeRepository
                         {
                             ID = Convert.ToInt32(row["ID"]),
                             Name = row["Name"].ToString(),
-                            ManagerID = row["ManagerID"] != DBNull.Value ? (int?)Convert.ToInt32(row["ManagerID"]) : null,
+                            ManagerID = row["ManagerID"] != DBNull.Value ? Convert.ToInt32(row["ManagerID"]) : null,
                             Level = Convert.ToInt32(row["Level"])
                         };
 
